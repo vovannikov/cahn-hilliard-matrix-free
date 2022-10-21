@@ -179,7 +179,7 @@ template <int dim,
           int n_components,
           typename Number,
           typename VectorizedArrayType>
-class AllenCahnImplicit
+class CahnHilliardImplicit
 {
 public:
   using VectorType = LinearAlgebra::distributed::Vector<Number>;
@@ -187,7 +187,7 @@ public:
   using value_type  = Number;
   using vector_type = VectorType;
 
-  AllenCahnImplicit(
+  CahnHilliardImplicit(
     const MatrixFree<dim, Number, VectorizedArrayType> &matrix_free,
     const double                                        M,
     const double                                        kappa)
@@ -551,12 +551,12 @@ public:
     double time_last_output = 0;
     output_result(time_last_output);
 
-    using Operator = AllenCahnImplicit<dim,
-                                       fe_degree,
-                                       n_points_1D,
-                                       2,
-                                       Number,
-                                       VectorizedArrayType>;
+    using Operator = CahnHilliardImplicit<dim,
+                                          fe_degree,
+                                          n_points_1D,
+                                          2,
+                                          Number,
+                                          VectorizedArrayType>;
 
 #ifdef IDENTITY
     using Preconditioner = PreconditionIdentity;
